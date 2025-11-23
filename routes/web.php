@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
@@ -12,45 +14,12 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
-    return view('posts', ['title'=> 'Blog', 'posts'=> [
-        [
-            'id' => 1,
-            'slug' => 'judul-artikel-pertama',
-            "title" => "Judul Artikel Pertama",
-            "author" => "M. Febrian Syah",
-            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum sed, voluptas ut similique sequi enim possimus nulla consequuntur, cum eius nemo aliquam officiis eligendi laboriosam at animi obcaecati libero tempore."
-        ],
-        [
-            "id"=> 2,
-            'slug' => 'judul-artikel-kedua',
-            "title" => "Judul Artikel Kedua",
-            "author" => "M. Febrian Syah",
-            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum sed, voluptas ut similique sequi enim possimus nulla consequuntur, cum eius nemo aliquam officiis eligendi laboriosam at animi obcaecati libero tempore."
-        ]
-    ]]);
+    return view('posts', ['title'=> 'Blog', 'posts'=> Post::all()]);
 });
 
 Route::get('/posts/{slug}', function ($slug) {
-    $posts = [
-        [
-            'id' => 1,
-            'slug' => 'judul-artikel-pertama',
-            "title" => "Judul Artikel Pertama",
-            "author" => "M. Febrian Syah",
-            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum sed, voluptas ut similique sequi enim possimus nulla consequuntur, cum eius nemo aliquam officiis eligendi laboriosam at animi obcaecati libero tempore."
-        ],
-        [
-            "id"=> 2,
-            'slug' => 'judul-artikel-kedua',
-            "title" => "Judul Artikel Kedua",
-            "author" => "M. Febrian Syah",
-            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum sed, voluptas ut similique sequi enim possimus nulla consequuntur, cum eius nemo aliquam officiis eligendi laboriosam at animi obcaecati libero tempore."
-        ]
-    ];
 
-    $post = Arr::first($posts, function($post) use ($slug) {
-        return $post['slug'] == $slug;
-    });
+    $post = Post::find($slug);
 
     return view('post', [
         'title' => 'Single Post',

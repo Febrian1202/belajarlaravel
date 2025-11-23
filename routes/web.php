@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return view('about', ['title' => 'About Us']);
+    return view('about', ['name' => 'M. Febrian Syah', 'title' => 'About Us']);
 });
 
 Route::get('/blog', function () {

@@ -41,6 +41,8 @@
         </div>
     </div>
 
+    {{ $posts->links() }}
+
     <div class="py-4 px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-0">
         <div class="grid gap-8 lg:grid-cols-3 md:grid-cols-2">
 
@@ -90,5 +92,7 @@
             @endforelse
         </div>
     </div>
+
+    {{ $posts->links() }}
 
 </x-layout>
